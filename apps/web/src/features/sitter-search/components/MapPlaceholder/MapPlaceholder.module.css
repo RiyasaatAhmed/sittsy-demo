@@ -1,0 +1,10 @@
+.placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--subtle);
+  color: var(--muted);
+  font-size: 14px;
+}

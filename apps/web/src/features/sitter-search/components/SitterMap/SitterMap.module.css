@@ -1,0 +1,54 @@
+.map {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+/* Calmer basemap so the pins stand out. */
+.softTiles {
+  filter: saturate(0.55) brightness(1.04) contrast(0.95);
+}
+
+/* Leaflet wraps each pin in this element; remove its default white box. */
+.pinIcon {
+  border: none;
+  background: none;
+}
+
+/* Dark teardrop pin with the rank number. */
+.pin {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  background: #3a3c40;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+  transform: rotate(-45deg);
+  cursor: pointer;
+}
+
+.pin > span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  transform: rotate(45deg);
+}
+
+/* Row under the mouse: its pin grows. */
+.pinHovered {
+  transform: rotate(-45deg) scale(1.25);
+}
+
+/* Pin that was clicked: accent colour. */
+.pinSelected {
+  background: var(--accent);
+}
+
+/* The search location (an SVG circle drawn by Leaflet). */
+.searchMarker {
+  stroke: var(--accent);
+  fill: var(--accent);
+  fill-opacity: 0.3;
+}
