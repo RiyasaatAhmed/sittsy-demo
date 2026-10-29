@@ -1,0 +1,46 @@
+/* Replaces content that could not load: centred icon, title, text and action. */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 120px 48px;
+  text-align: center;
+}
+
+.iconBox {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background: #f4f4f5;
+}
+
+.iconBox svg {
+  width: 24px;
+  height: 24px;
+  color: #71717a;
+}
+
+.title {
+  color: #09090b;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.message {
+  max-width: 420px;
+  color: #71717a;
+  font-size: 14px;
+  line-height: 22.75px;
+}
+
+@media (max-width: 520px) {
+  .state {
+    padding: 64px 16px;
+  }
+}

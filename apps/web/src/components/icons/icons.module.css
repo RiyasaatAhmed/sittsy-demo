@@ -1,0 +1,18 @@
+/* Applied only when an icon is given a tone; otherwise it inherits the text colour. */
+.icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.star {
+  color: #f5b301;
+}

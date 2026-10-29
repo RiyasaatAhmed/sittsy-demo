@@ -1,0 +1,91 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  height: var(--header-height);
+  padding: 0 16px;
+  background: var(--bg);
+}
+
+.brand {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #18181b;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.brandMark {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.brandText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Disclaimer under the brand name, used when the header has no room for the pill. */
+.compactNote {
+  white-space: normal;
+  display: none;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.unofficial {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@media (max-width: 1100px) {
+  .topbar {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .right {
+    display: none;
+  }
+
+  .compactNote {
+    display: block;
+  }
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    position: static;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    height: auto;
+    padding: 12px 8px;
+  }
+}

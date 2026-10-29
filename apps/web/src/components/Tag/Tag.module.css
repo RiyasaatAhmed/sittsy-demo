@@ -1,0 +1,28 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.tag svg {
+  width: 12px;
+  height: 12px;
+}
+
+.verified {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.warning {
+  border-color: #f0c27a;
+  color: #9a5b00;
+}
