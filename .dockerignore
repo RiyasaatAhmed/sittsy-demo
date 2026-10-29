@@ -1,0 +1,25 @@
+# Keep the build context small and free of local state and secrets.
+.git
+**/node_modules
+**/.next
+**/out
+**/dist
+**/coverage
+**/*.log
+**/.env*
+**/*.tsbuildinfo
+**/next-env.d.ts
+# Tests and test tooling are not part of the images.
+**/*.test.ts
+**/*.test.tsx
+apps/**/testing
+**/vitest.config.mts
+vitest.config.mts
+docs
+scripts
+
+# Local handoff and browser diagnostics
+task.md
+e2e
+playwright-report
+test-results

@@ -1,0 +1,88 @@
+# The whole stack: Postgres, a one-shot database setup, the Express API and
+# the static web app on nginx. All data is FAKE; the credentials are for local
+# use only.
+#
+#   docker compose up -d --build     → http://localhost:8080
+#
+# Postgres is also published on 5433 for local development (`npm run dev`),
+# which uses ports 3000 and 4000, so both can run at the same time.
+
+x-api-image: &api-image
+  image: sitter-ranking-api:local
+  build:
+    context: .
+    dockerfile: apps/api/Dockerfile
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sitters
+      POSTGRES_PASSWORD: sitters
+      POSTGRES_DB: sitters
+    ports:
+      # Host port 5433 so it does not clash with a Postgres already on 5432.
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sitters -d sitters"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+
+  # Runs once: applies migrations, seeds fake sitters if the table is empty.
+  db-setup:
+    <<: *api-image
+    command: ["node", "dist/setup.js"]
+    environment:
+      DATABASE_URL: postgres://sitters:sitters@db:5432/sitters
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *api-image
+    environment:
+      DATABASE_URL: postgres://sitters:sitters@db:5432/sitters
+      LOG_LEVEL: info
+      # One proxy (nginx) in front: trust its X-Forwarded-For.
+      TRUST_PROXY: "1"
+      # The site is served over plain http://localhost:8080, so the demo-owner
+      # cookie cannot be HTTPS-only here. Behind HTTPS, leave this unset (true).
+      SECURE_COOKIES: "false"
+    # Not published: only nginx talks to it.
+    expose:
+      - "4000"
+    # A tiny init as PID 1 forwards signals and reaps processes.
+    init: true
+    # Ready = the database answers (the image's own check only tests liveness).
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/health/ready').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      start_period: 10s
+      retries: 10
+    depends_on:
+      db:
+        condition: service_healthy
+      db-setup:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  web:
+    image: sitter-ranking-web:local
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  db-data:
