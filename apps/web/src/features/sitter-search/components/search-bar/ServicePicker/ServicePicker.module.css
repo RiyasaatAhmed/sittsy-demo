@@ -1,0 +1,82 @@
+.picker {
+  padding: 20px;
+}
+
+.group + .group {
+  margin-top: 12px;
+}
+
+.groupTitle {
+  margin: 12px 12px 8px;
+  color: #a1a1aa;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  line-height: 19.5px;
+  text-transform: uppercase;
+}
+
+.options {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:hover,
+.selected {
+  background: #f4f4f5;
+}
+
+.option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 24px;
+  font-size: 22px;
+  line-height: 32px;
+  text-align: center;
+}
+
+.text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  color: #18181b;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.description {
+  color: #71717a;
+  font-size: 13px;
+  line-height: 17.875px;
+}
+
+.check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #18181b;
+}

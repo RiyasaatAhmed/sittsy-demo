@@ -1,0 +1,76 @@
+.chips {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--chips-height);
+  padding: 0 16px;
+  overflow-x: auto;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  scrollbar-width: none;
+}
+
+.chip {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--chip-border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--chip-text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.chip:hover {
+  border-color: #a1a1aa;
+}
+
+.chip input {
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.chipFilter {
+  color: #27272a;
+}
+
+.chipOn {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.divider {
+  flex-shrink: 0;
+  width: 1px;
+  height: 24px;
+  margin: 0 4px;
+  background: var(--border);
+}
+
+.fakeNote {
+  margin-left: auto;
+  padding-left: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .chips {
+    position: static;
+  }
+}

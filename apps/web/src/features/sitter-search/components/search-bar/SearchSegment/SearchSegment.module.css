@@ -1,0 +1,76 @@
+.segment {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  height: 64px;
+  padding: 12px 24px 12px 28px;
+  border: none;
+  border-radius: 500px;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.segment:hover {
+  background: var(--subtle);
+}
+
+/* Divider between segments, hidden next to the open or hovered one. */
+.segment + .segment::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 0;
+  border-left: 1px solid var(--border);
+}
+
+.segment:hover::before,
+.segment:hover + .segment::before,
+.active::before,
+.active + .segment::before {
+  border-color: transparent;
+}
+
+.segment:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* The segment whose panel is open: white, lifted out of the greyed bar. */
+.active,
+.active:hover {
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08), 0 4px 12px rgb(0 0 0 / 0.12);
+}
+
+.label {
+  margin-bottom: 4px;
+  color: var(--label);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+}
+
+.value {
+  overflow: hidden;
+  color: var(--label);
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.placeholder {
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .segment {
+    padding: 4px 10px;
+  }
+}
