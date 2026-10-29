@@ -1,0 +1,6 @@
+.results {
+  min-width: 0;
+  /* Changing page scrolls back to the first result, clear of the sticky bars. */
+  scroll-margin-top: var(--sticky-top);
+}
+
