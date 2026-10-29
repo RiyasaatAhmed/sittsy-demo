@@ -2,6 +2,7 @@
 
 export { coldStartDetail, coldStartValue, isColdStartEligible } from "./cold-start";
 export { RANKING_CONSTANTS } from "./constants";
+export { previousRanks, rankMovement } from "./rank-movement";
 export { rankSitters } from "./rank-sitters";
 export { scoreSitter } from "./score-sitter";
 export { activityValue, bayesianRating, distanceValue, qualityValue, responsivenessValue } from "./signals";
