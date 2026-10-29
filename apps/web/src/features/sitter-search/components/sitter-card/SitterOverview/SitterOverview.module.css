@@ -1,0 +1,45 @@
+.overview {
+  margin: 20px 16px 0;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  color: var(--heading);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+}
+
+.sampleTag {
+  margin-left: 4px;
+}
+
+.text {
+  color: var(--heading);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Three lines with an ellipsis until "Show more". */
+.clamped {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.toggle {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+}

@@ -1,0 +1,22 @@
+.line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.line strong {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+.dot {
+  margin: 0 4px;
+}
+
+.tags {
+  margin-top: 2px;
+}

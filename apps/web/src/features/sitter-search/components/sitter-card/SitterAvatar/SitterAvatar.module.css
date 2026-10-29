@@ -1,0 +1,43 @@
+.wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 94px;
+  height: 94px;
+}
+
+.avatar {
+  display: block;
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Small round badge at the bottom-right of the avatar. */
+.badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+}
+
+.badge svg {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 520px) {
+  .wrap,
+  .avatar {
+    width: 64px;
+    height: 64px;
+  }
+}

@@ -1,0 +1,21 @@
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 16px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.lines {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.slow {
+  padding: 12px 16px;
+  color: var(--muted);
+  font-size: 14px;
+}

@@ -1,0 +1,62 @@
+.row {
+  /* Keeps a row clear of the sticky header and chips when scrolled to from the map. */
+  scroll-margin-top: var(--sticky-top);
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--divider);
+  background: var(--surface);
+  transition: background 0.15s;
+}
+
+.row:hover {
+  background: #fafafa;
+}
+
+/* Row picked from the map. */
+.selected,
+.selected:hover {
+  background: var(--accent-soft);
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 16px 0;
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.title {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.side {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.rank,
+.name {
+  margin: 0;
+  color: var(--heading);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+@media (max-width: 520px) {
+  .main {
+    gap: 12px;
+  }
+}

@@ -1,0 +1,13 @@
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: opacity 0.2s;
+}
+
+/* Another page or ranking is loading behind this one. The delay keeps fast
+   responses from flickering. */
+.list[aria-busy="true"] {
+  opacity: 0.6;
+  transition-delay: 0.15s;
+}
