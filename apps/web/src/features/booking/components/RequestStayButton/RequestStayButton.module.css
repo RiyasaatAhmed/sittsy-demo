@@ -1,0 +1,6 @@
+.hint {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 18px;
+  white-space: nowrap;
+}

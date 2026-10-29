@@ -1,0 +1,52 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.name {
+  color: var(--heading);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.detail {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.demo {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 8px;
+  border: 1px dashed var(--chip-border);
+  border-radius: 8px;
+  color: var(--muted);
+}

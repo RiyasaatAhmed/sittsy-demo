@@ -1,0 +1,31 @@
+.flow,
+.loading,
+.unavailable {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flow > button {
+  align-self: stretch;
+  justify-content: center;
+}
+
+.unavailable {
+  align-items: flex-start;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.title {
+  color: var(--heading);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 18px;
+}
