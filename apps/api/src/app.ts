@@ -1,3 +1,4 @@
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { type Express } from "express";
 import { rateLimit } from "express-rate-limit";
@@ -8,17 +9,25 @@ import type { Config } from "./config/config";
 import { errorHandler, notFound } from "./shared/http/error-handler";
 import { requestId } from "./shared/http/request-id";
 import type { Logger } from "./logger/logger";
+import { bookingQuoteRouter } from "./modules/bookings/booking-quote.router";
+import { bookingStatusRouter } from "./modules/bookings/booking-status.router";
+import type { BookingsRepository } from "./modules/bookings/bookings.repository";
+import { bookingsRouter } from "./modules/bookings/bookings.router";
 import { healthRouter } from "./modules/health/health.router";
+import { createOwnerSession } from "./modules/owners/owner-session";
+import type { OwnersRepository } from "./modules/owners/owners.repository";
 import { priceSuggestionRouter } from "./modules/sitters/price-suggestion.router";
 import { sittersRouter } from "./modules/sitters/sitters.router";
 import type { SittersRepository } from "./modules/sitters/sitters.repository";
 
 export type AppDeps = {
-  config: Pick<Config, "corsOrigins" | "trustProxy" | "rateLimitPerMinute">;
+  config: Pick<Config, "corsOrigins" | "trustProxy" | "rateLimitPerMinute" | "secureCookies">;
   logger: Logger;
   sitters: SittersRepository;
+  owners: OwnersRepository;
+  bookings: BookingsRepository;
   isShuttingDown: () => boolean;
-  /** The current time, for ranking (injected so tests control it). */
+  /** The current time, for ranking and bookings (injected so tests control it). */
   now?: () => Date;
 };
 
@@ -30,6 +39,8 @@ export function createApp({
   config,
   logger,
   sitters,
+  owners,
+  bookings,
   isShuttingDown,
   now = () => new Date(),
 }: AppDeps): Express {
@@ -65,6 +76,7 @@ export function createApp({
         methods: ["GET", "POST"],
         allowedHeaders: ["Content-Type", "Idempotency-Key"],
         exposedHeaders: ["Idempotent-Replayed", "Location"],
+        // The demo-owner cookie must travel with cross-origin calls too.
         credentials: true,
       }),
     );
@@ -79,8 +91,13 @@ export function createApp({
       message: tooManyRequests,
     }),
   );
+  api.use(cookieParser());
+  const session = createOwnerSession({ owners, secureCookies: config.secureCookies });
   api.use(sittersRouter({ sitters, now }));
   api.use(priceSuggestionRouter({ sitters }));
+  api.use(bookingQuoteRouter({ bookings, now }));
+  api.use(bookingsRouter({ bookings, session, now }));
+  api.use(bookingStatusRouter({ bookings, session, now }));
   app.use("/api", api);
 
   app.use(notFound);

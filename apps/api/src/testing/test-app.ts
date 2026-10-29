@@ -6,6 +6,8 @@ import { vi } from "vitest";
 import type { Sitter } from "@sitter/domain/sitter";
 import { createApp, type AppDeps } from "../app";
 import type { SittersRepository } from "../modules/sitters/sitters.repository";
+import { fakeBookings } from "./fake-bookings";
+import { fakeOwners } from "./fake-owners";
 
 export function fakeSitter(id: number, overrides: Partial<Sitter> = {}): Sitter {
   return {
@@ -32,18 +34,25 @@ export function fakeRepository(sitters: Sitter[] = [1, 2, 3, 4, 5].map((id) => f
   };
 }
 
-type TestAppOptions = Partial<Omit<AppDeps, "config">> & {
+type TestAppOptions = Partial<Omit<AppDeps, "config" | "owners" | "bookings">> & {
   config?: Partial<AppDeps["config"]>;
+  // The fakes' own types, so tests can program and inspect their spies.
+  owners?: ReturnType<typeof fakeOwners>;
+  bookings?: ReturnType<typeof fakeBookings>;
 };
 
 export function testApp(options: TestAppOptions = {}) {
   const sitters = options.sitters ?? fakeRepository();
+  const owners = options.owners ?? fakeOwners();
+  const bookings = options.bookings ?? fakeBookings();
   const app = createApp({
-    config: { corsOrigins: [], trustProxy: false, rateLimitPerMinute: 1000, ...options.config },
+    config: { corsOrigins: [], trustProxy: false, rateLimitPerMinute: 1000, secureCookies: false, ...options.config },
     logger: options.logger ?? pino({ level: "silent" }),
     sitters,
+    owners,
+    bookings,
     isShuttingDown: options.isShuttingDown ?? (() => false),
     now: options.now ?? (() => new Date("2026-06-01T12:00:00Z")),
   });
-  return { app, sitters };
+  return { app, sitters, owners, bookings };
 }

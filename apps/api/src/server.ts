@@ -6,6 +6,8 @@ import { loadConfig, redactDatabaseUrl } from "./config/config";
 import { createDb, createPool } from "./db/client";
 import { createShutdown } from "./shared/lifecycle/shutdown";
 import { createLogger } from "./logger/logger";
+import { createBookingsRepository } from "./modules/bookings/bookings.repository";
+import { createOwnersRepository } from "./modules/owners/owners.repository";
 import { createSittersRepository } from "./modules/sitters/sitters.repository";
 
 const config = loadConfig(process.env);
@@ -23,6 +25,8 @@ const app = createApp({
   config,
   logger,
   sitters: createSittersRepository(db),
+  owners: createOwnersRepository(db),
+  bookings: createBookingsRepository(db),
   isShuttingDown: () => shuttingDown,
 });
 
